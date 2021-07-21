@@ -7,7 +7,8 @@ const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb+srv://jdubois:dzkjd837(54@cluster0.xolsv.mongodb.net/dataBasePekocko?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
+  { useCreateIndex: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));

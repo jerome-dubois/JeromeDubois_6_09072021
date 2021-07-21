@@ -1,8 +1,17 @@
+// Import du package de chiffrement bcrypt
 const bcrypt = require('bcrypt');
+
+// Import du package pour pouvoir créer et vérifier les tokens d'authentification
 const jwt = require('jsonwebtoken');
 
+// Import du schéma de données User
 const User = require('../models/User');
 
+// Définition et export des différentes logiques métier correspondant à chacune des routes
+
+
+// Définition et export de la logique métier de la route post qui chiffre le mot de passe de l'utilisateur,
+// ajoute l'utilisateur à la base de données
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -17,6 +26,8 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+// Définition et export de la logique métier de la route post qui vérifie les informations d'identification de l'utilisateur, 
+// en renvoyant l'identifiant userID depuis la base de données et un jeton Web JSON signé (contenant également l'identifiant userID)
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
