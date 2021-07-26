@@ -1,6 +1,7 @@
 // Déclaration de l'outil de modélisation d'objet MongoDB via le package mongoose (facilite les échanges avec la base de données MongoBD grâce à une librairie de fonctions utiles)
 const mongoose = require ('mongoose');
 
+// Déclaration du plugin mongoose-unique-validator qui ajoute une validation de pré-enregistrement pour les champs uniques dans un schéma Mongoose.
 const uniqueValidator = require('mongoose-unique-validator');
 
 // Création du schéma de données userSchema à partir des différents attributs du modèle de données fourni dans la note de cadrage du projet

@@ -1,5 +1,4 @@
 // Import du package de gestion des fichiers entrants dans les requêtes HTTP
-
 const multer = require('multer');
 
 const MIME_TYPES = {
