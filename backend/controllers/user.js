@@ -1,6 +1,9 @@
 // Import du package de chiffrement bcrypt
 const bcrypt = require('bcrypt');
 
+// Import de la bibliothèque JavaScript de normes cryptographiques crypto-js
+const CryptoJS = require("crypto-js");
+
 // Import du package pour pouvoir créer et vérifier les tokens d'authentification
 const jwt = require('jsonwebtoken');
 
@@ -9,14 +12,16 @@ const User = require('../models/User');
 
 // Définition et export des différentes logiques métier correspondant à chacune des routes
 
-
 // Définition et export de la logique métier de la route post qui chiffre le mot de passe de l'utilisateur,
 // ajoute l'utilisateur à la base de données
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            const user = User({
-                email: req.body.email,
+            // Masquage de l'email avec la librairie crypto-js
+            const emailCryptoJs = CryptoJS.HmacSHA1(req.body.email, "ZKJLfkfjd8724").toString();
+            // Création du nouvel utilisateur avec l'email masqué et le mot de passe haché
+            const user = new User({
+                email: emailCryptoJs,
                 password: hash
             });
             user.save()

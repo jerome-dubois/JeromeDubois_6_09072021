@@ -37,7 +37,7 @@ exports.modifySauce = (req, res, next) => {
 
 // Définition et export de la logique métier de la route get qui renvoie la sauce avec l'ID fourni
 exports.getOneSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
+        Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
 };
