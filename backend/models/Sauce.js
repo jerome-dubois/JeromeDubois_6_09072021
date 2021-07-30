@@ -1,8 +1,6 @@
 // Déclaration de l'outil de modélisation d'objet MongoDB via le package mongoose (facilite les échanges avec la base de données MongoBD grâce à une librairie de fonctions utiles)
 const mongoose = require ('mongoose');
 
-// const validate = require('mongoose-validator');
-
 // Import du middleware sauceValidator pour la validation des entrées du modèle Sauce.js
 const sauceValidator = require('../middleware/sauceValidator');
 
