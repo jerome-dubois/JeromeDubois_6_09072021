@@ -11,7 +11,8 @@ const validator = require('validator');
 // Déclaration du type des attributs du schéma de données et leur caractère obligatoire,  vérification de la validité du format de l'email
 
 const userSchema = mongoose.Schema({
-    email: { type : String, required: true, unique: true, validate: [validator.isEmail, { error: 'Cette adresse est invalide' }] },
+    // email: { type : String, required: true, unique: true, validate: [validator.isEmail, { error: 'Cette adresse est invalide' }] },
+    email: { type : String, required: true, unique: true },
     password: { type : String, required: true },
 });
 

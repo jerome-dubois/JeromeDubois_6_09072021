@@ -42,7 +42,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_SUPERADMIN}:${process.env.DB_PA
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
 const app = express();
 
 app.use((req, res, next) => {
