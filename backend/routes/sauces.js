@@ -31,5 +31,8 @@ router.put('/:id', auth, multer, saucesCtrl.modifySauce);
 // Supprime la sauce avec l'ID fourni.
 router.delete('/:id', auth, saucesCtrl.deleteSauce);
 
+// Gère les like/dislike sur la Sauce avec l'ID fourni
+router.post('/:id/like', auth, saucesCtrl.likedislikeSauce);
+
 // Enregistrement des différentes routes dans le routeur Express
 module.exports = router;

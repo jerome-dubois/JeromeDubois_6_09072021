@@ -18,8 +18,8 @@ exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             // Masquage de l'email avec la librairie crypto-js par chiffrement avec la méthode HmacSHA512
-            const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, "SECRET KEY ZKJLfkfjd8724").toString();
-            // const emailCryptoJs = CryptoJS.AES.encrypt(req.body.email, 'SECRET KEY ZKJLfkfjd8724').toString();
+            // const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, "SECRET KEY ZKJLfkfjd8724").toString();
+            const emailCryptoJs = CryptoJS.AES.encrypt(req.body.email, 'SECRET KEY ZKJLfkfjd8724').toString();
             console.log(emailCryptoJs);            
             // Création du nouvel utilisateur avec l'email masqué et le mot de passe haché
             const user = new User({
