@@ -23,7 +23,10 @@ exports.createSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
-// Définition et export de la logique métier appliquée à la route put qui met à jour la sauce avec l'identifiant fourni. Si une image est téléchargée, elle est capturée l'image URL des sauces mise à jour. Si aucun fichier n'est fourni, les détails de la sauce figurent directement dans le corps de la demande (req.body.name, req.body.heat etc). Si un fichier est fourni, la sauce avec chaîne est en req.body.sauce.
+/* Définition et export de la logique métier appliquée à la route put qui met à jour la sauce avec l'identifiant fourni. 
+- Si une image est téléchargée, elle est capturée et l'image URL des sauces mise à jour.
+- Si aucun fichier n'est fourni, les détails de la sauce figurent directement dans le corps de la demande (req.body.name, req.body.heat etc).
+- Si un fichier est fourni, la sauce avec chaîne est en req.body.sauce.*/
 exports.modifySauce = (req, res, next) => {
     
     // Si la modification de l'objet sauce implique un changement d'image

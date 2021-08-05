@@ -6,7 +6,7 @@ const path = require('path');
 /* Helmet aide à protéger l'application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP liées à la sécurité grâce aux neuf middleware suivants: csp, hidePoweredBy, hsts, ieNoOpen, noCache, noSniff, frameguard, xssFilter  
 - Ressource:https://www.npmjs.com/package/helmet
 - Ressource: https://expressjs.com/fr/advanced/best-practice-security.html */
-// const helmet = require("helmet");
+const helmet = require("helmet");
 
 /* Déclaration du module Node.js permettant d'utiliser les cookies de manière sécurisée
 Ressource: https://www.npmjs.com/package/express-session*/
@@ -70,7 +70,7 @@ app.use(bodyParser.json());
 
 // Activation du module helmet précédemment défini sur l'application
 // Ce dernier via le middleware xssFilter permet notamment en définissant X-XSS-Protection d’activer le filtre de script intersites (XSS) dans les navigateurs Web les plus récents (protection contre les attaques Cross Site Scripting = XSS)
-// app.use(helmet());
+app.use(helmet());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
