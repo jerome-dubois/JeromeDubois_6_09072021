@@ -26,7 +26,12 @@ const emailMask2Options = {
 // Définition et export de la logique métier de la route post qui chiffre le mot de passe de l'utilisateur,
 // ajoute l'utilisateur à la base de données
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
+    const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/;
+    
+    if (!emailRegex.test(req.body.email)) {
+        return res.status(400).json({ error: 'Votre email n\'est pas valide !'})
+    } else {
+        bcrypt.hash(req.body.password, 10)
         .then(hash => {
             // Masquage de l'email avec la librairie crypto-js par chiffrement avec la méthode HmacSHA512
             const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
@@ -41,6 +46,8 @@ exports.signup = (req, res, next) => {
               .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
+    }
+     
 };
 
 // Définition et export de la logique métier de la route post qui vérifie les informations d'identification de l'utilisateur, 

@@ -9,6 +9,7 @@ const fs = require('fs');
 // Définition et export de la logique métier appliquée à la route post qui crée la sauce avec l'ID fourni
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);    
+    console.log(req.body.sauce); 
     delete sauceObject._id;
     const sauce = new Sauce({
         ...sauceObject,
@@ -54,10 +55,11 @@ exports.modifySauce = (req, res, next) => {
 };
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie la sauce avec l'ID fourni
-exports.getOneSauce = (req, res, next) => {
-        Sauce.findOne({ _id: req.params.id })
+exports.getOneSauce = (req, res, next) => {      
+    Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
+        
 };
 
 // Définition et export de la logique métier appliquée à la route delete qui supprime la sauce avec l'ID fourni
@@ -83,7 +85,9 @@ exports.getAllSauces = (req, res, next) => {
 };
 
 exports.likedislikeSauce = (req, res, next) => {
-    
+
+    console.log(req.body.like);
+
     // On analyse la valeur like de la requête renvoyée par l'API 
     switch (req.body.like) {
     

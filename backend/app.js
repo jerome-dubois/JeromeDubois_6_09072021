@@ -8,6 +8,21 @@ const path = require('path');
 - Ressource: https://expressjs.com/fr/advanced/best-practice-security.html */
 const helmet = require("helmet");
 
+// Ce middleware Express définit des en-têtes de réponse HTTP pour essayer de désactiver la mise en cache côté client.
+const nocache = require("nocache");
+
+/* Middleware d'Express 4.x qui nettoie les données fournies par l'utilisateur pour empêcher l'injection d'opérateur MongoDB.
+Ce module recherche toutes les clés dans les objets commençant par un signe $ ou contenant un .,
+à partir de req.body, req.query ou req.params. Il peut alors soit :
+
+- supprimer complètement ces clés et les données associées de l'objet, ou
+- remplacer les caractères interdits par un autre caractère autorisé (choix fait ici avec _).
+
+Le comportement est régi par l'option passée, replaceWith. Définissez cette option pour que le désinfectant remplace les caractères interdits par le caractère transmis.
+
+*/
+const mongoSanitize = require('express-mongo-sanitize');
+
 /* Déclaration du module Node.js permettant d'utiliser les cookies de manière sécurisée
 Ressource: https://www.npmjs.com/package/express-session*/
 const session = require('express-session');
@@ -22,7 +37,6 @@ Cela permet de masquer les paramétres de connexion à la base de données
 de l'application The Twelve-Factor.)
 Ressource: https://www.npmjs.com/package/dotenv */
 require('dotenv').config();
-
 
 /* Connection à la base de données en mode administrateur restreint pour éditer le contenu de la base de données 
 (lecture et écriture) via les variables d'environnement DB_ADMIN et DB_PASS_ADMIN définiées dans le fichier .env*/
@@ -66,11 +80,23 @@ app.use(session({
   cookie: { httpOnly: true, maxAge: 3600000 } 
 }));
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Activation du module helmet précédemment défini sur l'application
 // Ce dernier via le middleware xssFilter permet notamment en définissant X-XSS-Protection d’activer le filtre de script intersites (XSS) dans les navigateurs Web les plus récents (protection contre les attaques Cross Site Scripting = XSS)
 app.use(helmet());
+
+// Désactivation de la mise en cache sur le navigateur pour limiter le risque d'attaque de sessions
+app.use(nocache());
+
+// Remplace tous les caractères interdits dans les clés
+// Or, to replace prohibited characters with _, use:
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  }),
+);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
