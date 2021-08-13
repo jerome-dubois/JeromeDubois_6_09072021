@@ -33,7 +33,9 @@ Then, create a database user with your identifiers and add them in a .env file c
 DB_SUPERADMIN = "your_user_id_with_CRUD_custom_role"
 DB_PASS_SUPERADMIN = "your_password"
 
-#### Open a new terminal
+#### Launching
+
+Open a new terminal with the following successive orders:
 
 cd backend
 
@@ -42,6 +44,8 @@ npm install
 nodemon server
 
 ### Frontend
+
+Open a new terminal with the following successive orders:
 
 cd frontend
 
