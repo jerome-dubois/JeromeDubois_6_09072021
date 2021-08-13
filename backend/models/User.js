@@ -5,7 +5,7 @@ const mongoose = require ('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 // Déclaration de la bibliothèque de validation et de nettoyage des chaînes de caractères 
-const validator = require('validator');
+// const validator = require('validator');
 
 // Création du schéma de données userSchema à partir des différents attributs du modèle de données fourni dans la note de cadrage du projet
 // Déclaration du type des attributs du schéma de données et leur caractère obligatoire,  vérification de la validité du format de l'email
