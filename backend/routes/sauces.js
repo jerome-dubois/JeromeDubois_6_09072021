@@ -17,10 +17,10 @@ const saucesCtrl = require('../controllers/sauces');
 // Implémentation des différentes routes avec, pour chaque route, authentification et configuration de la logique métier appropriée:
 
 // Renvoie le tableau de toutes les sauces dans la base de données 
-router.get('/', saucesCtrl.getAllSauces);
+router.get('/', auth, saucesCtrl.getAllSauces);
 
 // Renvoie la sauce avec l'ID fourni
-router.get('/:id', saucesCtrl.getOneSauce);
+router.get('/:id', auth, saucesCtrl.getOneSauce);
 
 // Capture et enregistre l'image, analyse la sauce en utilisant une chaîne de caractères et l'enregistre dans la base de données, en définissant correctement son image URL. Remet les sauces aimées et celles détestées à 0, et les sauces usersliked et celles usersdisliked aux tableaux vides.
 router.post('/', auth, multer, saucesCtrl.createSauce);

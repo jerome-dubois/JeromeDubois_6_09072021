@@ -1,6 +1,12 @@
 const express = require('express');
+
+/* Afin de lire les données HTTP POST, nous devons utiliser le module "body-parser". body-parser est un middleware express qui lit l'entrée d'un formulaire et le stocke en tant qu'objet javascript accessible via req.body */
 const bodyParser = require('body-parser');
+
+/* Déclaration du plugin Mongoose pour la modélisation des données sous forme de schéma pour MongoDB*/
 const mongoose = require('mongoose');
+
+/* Le module de chemin d'accès path fournit des utilitaires pour travailler avec les chemins de fichiers et de répertoires. Permet d'accéder au path de notre serveur*/
 const path = require('path');
 
 /* Helmet aide à protéger l'application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP liées à la sécurité grâce aux neuf middleware suivants: csp, hidePoweredBy, hsts, ieNoOpen, noCache, noSniff, frameguard, xssFilter  

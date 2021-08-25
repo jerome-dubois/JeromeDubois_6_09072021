@@ -12,14 +12,14 @@ const User = require('../models/User');
 
 require('dotenv').config();
 
-const MaskData = require("../node_modules/maskdata");
+// const MaskData = require("../node_modules/maskdata");
 
-const emailMask2Options = {
-    maskWith: "*",
-    unmaskedStartCharactersBeforeAt: 0,
-    unmaskedEndCharactersAfterAt: 0,
-    maskAtTheRate: false,
-  };
+// const emailMask2Options = {
+//     maskWith: "*",
+//     unmaskedStartCharactersBeforeAt: 0,
+//     unmaskedEndCharactersAfterAt: 0,
+//     maskAtTheRate: false,
+// };
 
 // Définition et export des différentes logiques métier correspondant à chacune des routes
 
