@@ -75,15 +75,16 @@ app.use((req, res, next) => {
 
 /* Option name: L’utilisation d’un nom de cookie de session par défaut risque d’ouvrir l'application aux attaques. Le problème de sécurité qui en découle est le suivant : une personne potentiellement malveillante peut l’utiliser pour s’identifier auprès du serveur et cibler ses attaques en conséquence. Pour éviter ce problème, on utilise un nom de cookie générique grâce à l'option name
   - Objet Cookie: 
-  - httponly: Garantit que le cookie n’est envoyé que sur HTTP(S), pas au JavaScript du client, ce qui renforce la protection contre les attaques de type cross-site scripting.
-maxAge: Définition d'une durée d'expiration d'une pour les sessions de cookies (calculée en ajoutant à la valeur de l'heure actuelle du serveur 3600000s) */
+    - httponly: Garantit que le cookie n’est envoyé que sur HTTP(S), pas au JavaScript du client, ce qui renforce la protection contre les attaques de type cross-site scripting,
+    - secure - Garantit que le navigateur n’envoie le cookie que sur HTTPS.
+    - maxAge: Définition d'une durée d'expiration d'une pour les sessions de cookies (calculée en ajoutant à la valeur de l'heure actuelle du serveur 3600000s) */
 
 app.use(session({
   secret: 'jzKahd424!*',
   name : 'sessionId_OCP6',
   resave: false,
   saveUninitialized: false,
-  cookie: { httpOnly: true, maxAge: 3600000 } 
+  cookie: { httpOnly: true, secure: true, maxAge: 3600000 } 
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
